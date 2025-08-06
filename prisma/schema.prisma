@@ -81,3 +81,56 @@ model userRole {
 
   @@map("user_role")
 }
+
+
+model module {
+modCode String @id @map("mod_code") @db.VarChar(10)
+modName String @map("mod_name") @db.VarChar(100)
+creditUnit Int @map("credit_unit")
+modCoord String? @map("mod_coord") @db.Char(4)
+}
+
+
+model staff_dependent {
+  staff_no        String @db.Char(4)
+  dependent_name  String @db.VarChar(30)
+  relationship    String @db.VarChar(20)
+
+  @@id([staff_no, dependent_name])
+}
+
+
+model pre_requisite {
+  mod_code  String @db.VarChar(10)
+  requisite String @db.VarChar(10)
+
+  @@id([mod_code, requisite])
+}
+
+
+model country {
+  country_name String @id @db.VarChar(30)
+  language     String @db.VarChar(30)
+  region       String @db.VarChar(30)
+}
+
+
+model student {
+  stud_no     String   @id @db.Char(4)
+  stud_name   String   @db.VarChar(30)
+  address     String   @db.VarChar(100)
+  mobile_phone String  @db.Char(8)
+  home_phone  String   @db.Char(8)
+  dob         DateTime
+  nationality String   @db.VarChar(30)
+  smc_code    String   @db.VarChar(30)
+}
+
+model stud_mod_performance {
+  stud_no  String @db.Char(4)
+  mod_code String @db.VarChar(10)
+  mark     Int
+  grade    String @db.Char(2)
+  
+  @@id([stud_no, mod_code])
+}
